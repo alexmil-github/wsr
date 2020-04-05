@@ -9,6 +9,7 @@ use App\Roles;
 use Hamcrest\Core\AllOf;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -71,15 +72,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $path = $data['photo']->store('public'); //Добавил
-
+        $photoname = time().'.'.$data['photo']->getClientOriginalExtension();
+        $data['photo']->storeAs('public',$photoname);
         return User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'], //добавил
             'role' => $data['role'], //добавил
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'photo' => $path, //Добавил
+            'photo' => $photoname, //Добавил
         ]);
     }
 // Добавляем публичную функцию показа главной страницы
@@ -88,14 +89,5 @@ class RegisterController extends Controller
         $roles = Roles::all();
         //      $roles = DB::table('roles')->get(); //Это второй способ обращения к базе данных. В этом случае добавляем: use Illuminate\Support\Facades\DB;
         return view('auth.register', ['roles' => $roles]);
-    }
-
-    public function messages()
-    {
-        return [
-            'required' => 'Поле обязательно для заполнения!',
-            'email'  => 'Не верное введен email',
-            'photo'  => 'Файл только с расширением jpg,jpeg,png и не более 5Мб',
-        ];
     }
 }
