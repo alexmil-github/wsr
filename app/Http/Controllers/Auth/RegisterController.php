@@ -72,15 +72,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $photoname = time().'.'.$data['photo']->getClientOriginalExtension();
-        $data['photo']->storeAs('public',$photoname);
+        $filename = time().'.'.$data['photo']->getClientOriginalExtension();
+        $data['photo']->storeAs('public',$filename);
         return User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'], //добавил
             'role' => $data['role'], //добавил
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'photo' => $photoname, //Добавил
+            'photo' => url('/public/storage/'.$filename),
         ]);
     }
 // Добавляем публичную функцию показа главной страницы
