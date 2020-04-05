@@ -70,6 +70,20 @@
                                 @enderror
                             </div>
                         </div>
+                        {{--Фото--}}
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Фотография</label>
+
+                            <div class="col-md-6">
+                                <input id="photo" type="file"  name="photo" required>
+                                <small class="form-text text-muted">изображение в формате jpg, jpeg, png размером не больше 5Мб.</small>
+                                @if ($errors->has('photo'))
+                                    <span class="help-block ">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         {{--Пароль--}}
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Пароль') }}</label>
@@ -92,21 +106,6 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-                        {{--Фото--}}
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Фотография</label>
-
-                            <div class="col-md-6">
-                                <input id="photo" type="file"  name="photo" required>
-                                <small class="form-text text-muted">изображение в формате jpg, jpeg, png размером не больше 5Мб.</small>
-                                @error('photo')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
