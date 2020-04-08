@@ -20,3 +20,5 @@ Route::get('/success', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+
+Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');

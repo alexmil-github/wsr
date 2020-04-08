@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('photo', 200); //Добавил
             $table->boolean('is_admin')->default(0);
+            $table->boolean('is_manager')->default(0);
             $table->rememberToken();
             $table->timestamps();
 
