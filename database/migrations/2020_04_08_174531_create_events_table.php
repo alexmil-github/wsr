@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->date('date');
-            $table->unsignedBigInteger('manager');
+            $table->unsignedBigInteger('manager')->nullable();
             $table->timestamps();
 
             $table->foreign('manager')->references('id')->on('users')->onDelete('cascade');
