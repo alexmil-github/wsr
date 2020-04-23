@@ -15,7 +15,9 @@
                         <br>
                         @if (count($events) > 0)
                             <h3>Мероприятия</h3>
-
+                            <form action="events/update" method="POST" class="form-horizontal">
+                                @csrf
+                                @method('PATCH')
                         <table class="table table-striped">
                             <tbody>
                             <tr>
@@ -38,8 +40,8 @@
                                         {{ date("d.m.Y",strtotime($event->date)) }}
                                     </td>
                                     <td width="213" valign="top">
-                                            <select id="manager" class="form-control" name="manager">
-                                            <option>Не выбран</option>
+                                            <select id="{{ $event->id }}" class="form-control" name="{{ $event->id }}">
+                                            <option value=""> Не выбран</option>
                                             @foreach($users as $user)
                                                 <option value="{{ $user->id }}"
                                                         @if ($user->id == old('manager', $event->manager))
@@ -52,6 +54,9 @@
                             @endforeach
                             </tbody>
                         </table>
+                            <button class="btn btn-primary">Сохранить</button>
+                            </form>
+
                         @endif
                     </div>
                 </div>
