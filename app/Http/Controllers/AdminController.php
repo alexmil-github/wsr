@@ -13,21 +13,23 @@ class AdminController extends Controller
         public function index(Events $events, User $user)
     {
         $events = Events::all();
+        $events = $events->sortBy('date');
         $users = User::all();
         //      $events = DB::table('events')->get(); //Это второй способ обращения к базе данных. В этом случае добавляем: use Illuminate\Support\Facades\DB;
         return view('admin', ['events' => $events, 'users' => $users]);
     }
     public function update(Request $request, Events $events)
     {
-     //   $events->update($request->all());
-     //   return redirect('admin');
-        if ($request->has(2))
-        {
-            dd($request->input(2) );
+        $events = Events::all();
+        foreach ( $events as $key ) {
+           // echo($key->id);
+            if ($request->has($key->id))
+            {
+             $data = Events::find($key->id);
+             $data->manager = $request->input($key->id) ;
+             $data->save();
+            }
         }
-
-
-  //      data = Events::find($request->request->all());
-
+        return redirect('admin');
     }
 }
