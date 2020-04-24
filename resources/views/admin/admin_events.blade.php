@@ -9,8 +9,8 @@
 
                     <div class="card-body">
                         <nav class="nav">
-                            <a class="nav-link disabled" href="#">Мероприятия</a>
-                            <a class="nav-link active" href="#">Категории форума</a>
+                            <a class="nav-link active" href="/admin">Категории форума</a>
+                            <a class="nav-link disabled" href="admin/events">Мероприятия</a>
                         </nav>
                         <br>
                         @if (count($events) > 0)

@@ -23,4 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
 
-Route::patch('events/update', 'AdminController@update')->middleware('admin');
+Route::get('/admin/events', 'AdminController@events')->name('events')->middleware('admin');
+
+Route::patch('admin/events/update', 'AdminController@update')->middleware('admin');
+
+Route::resource('admin/category', 'CategoryController')->middleware('admin');;
