@@ -13,6 +13,8 @@
                             <a class="nav-link active" href="/admin/events">Мероприятия</a>
                         </nav>
                         <br>
+                        <h3>Указать категорию для форума</h3>
+                        <hr>
                         <form action="category/" method="POST" class="form-horizontal">
                             @csrf
                             @method('PATCH')
