@@ -23,8 +23,21 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
 
-Route::get('/admin/events', 'AdminController@events')->name('events')->middleware('admin');
+//Events::
 
-Route::patch('admin/events/update', 'AdminController@update')->middleware('admin');
+Route::get('admin/events', 'AdminController@events')->name('events')->middleware('admin'); // Список всех мероприятий
 
-Route::resource('admin/category', 'CategoryController')->middleware('admin');;
+Route::post('admin/events', 'AdminController@store')->name('create_event')->middleware('admin'); // Создания
+
+Route::get('admin/events/delete/{id}', 'AdminController@destroy')->name('delete_event')->middleware('admin'); //Удаление
+
+Route::patch('admin/events/update_all', 'AdminController@update_all')->name('update_events')->middleware('admin'); //Редактирование списком
+
+Route::get('admin/events/show/{id}', 'AdminController@show')->name('show_event')->middleware('admin'); //Удаление
+
+Route::patch('admin/events/update', 'AdminController@update_all')->name('update_event')->middleware('admin'); //Редактирование одного мероприятия
+
+
+
+
+

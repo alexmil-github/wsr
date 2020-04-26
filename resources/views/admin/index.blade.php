@@ -8,32 +8,160 @@
                     <div class="card-header">Панель администратора</div>
 
                     <div class="card-body">
-                        <nav class="nav">
-                            <a class="nav-link disabled" href="/admin">Категории форума</a>
-                            <a class="nav-link active" href="/admin/events">Мероприятия</a>
-                        </nav>
-                        <br>
-                        <h3>Указать категорию для форума</h3>
+                        <h3>Мероприятия</h3>
                         <hr>
-                        <form action="category/" method="POST" class="form-horizontal">
-                            @csrf
-                            @method('PATCH')
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">Наименование категории</label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name='name' value="{{ old('name') }}" autocomplete="name" autofocus>
-                                    <button type="reset" title="Click me to clear the input field">&times;</button>
-
-                                </div>
-                                <button class="btn btn-primary">Сохранить</button>
-
-                            </div>
-
+                        <a href="" class="btn btn-md btn-success float-right" role="button" data-toggle="modal" data-target="#modal_01">Добавить новое</a>
+                        <form class="form-inline">
+                            <input class="form-control" type="text" placeholder="Поиск">
+                            <button class="btn btn-primary" type="submit">Найти</button>
                         </form>
+<br>
+                        @if (count($events) > 0)
+                        <form action="{{ route('update_events') }}" method="POST" class="form-horizontal">
+                                @csrf
+                                @method('PATCH')
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <th  valign="top">
+                                  Наименование мероприятия
+                                </th>
+                                <th valign="top">
+                                    Дата проведения
+                                </th>
+                                <th valign="top">
+                                    Менеджер
+                                </th>
+                                <th valign="top">
+                                </th>
+                            </tr>
+                            @foreach($events as $event)
+                                <tr>
+                                    <td width="30%" valign="top">
+                                            {{ $event->name }}
+                                    </td>
+                                    <td width="20%" valign="top">
+                                        {{ date("d.m.Y",strtotime($event->date)) }}
+                                    </td>
+                                    <td width="33%" valign="top">
+                                            <select class="form-control" name="{{ $event->id }}">
+                                            <option value=""> Не выбран</option>
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}"
+                                                        @if ($user->id == old('manager', $event->manager))
+                                                            selected="selected"
+                                                        @endif>{{ $user->name}} {{$user->last_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td valign="top">
+                                        <a id=" {{ $event->id }}" href="#"  class="btn btn-md btn-outline-primary" role="button" data-toggle="modal" data-target="#modal_02" onclick="get_update_event($(this).attr('id').trim())">
+                                            <i class="fa fa-pencil fa-fw"></i>
+                                        </a>
+                                        <a href="{{ route('delete_event', ['id' => $event->id]) }}" class="btn btn-md btn-outline-danger" >
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                            <button class="btn btn-primary">Сохранить изменения</button>
+                            </form>
+                        @endif
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{{--Модальное окно добавления нового мероприятия--}}
+    <div class="modal" tabindex="-1" role="dialog" id="modal_01">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Новое мероприятие</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{  route ('create_event') }}" method="POST" class="form-horizontal">
+                        @csrf
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Наименование') }}</label>
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control" name='name' value="{{ isset($events->name) }}" placeholder="Введите наименование мероприятия"  autofocus required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Дата проведения') }}</label>
+                            <div class="col-md-6">
+                                <input id="date" type="date" class="form-control" name='date' value="{{ isset($events->date) }}" placeholder="Введите дату"  autofocus required>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary">Добавить</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{--Модальное окно редактирования мероприятия--}}
+    <div class="modal" tabindex="-1" role="dialog" id="modal_02">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Редактирование мероприятия</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" class="form-horizontal">
+                        @csrf
+                        @method('PATCH')
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Наименование') }}</label>
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control" name='name' value="{{ $event->name }}" placeholder="Наименование"  autofocus required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Дата проведения') }}</label>
+                            <div class="col-md-6">
+                                <input id="date" type="date" class="form-control" name='date' value="{{ $event->date }}" placeholder="Дата"  autofocus required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Менеджер') }}</label>
+                            <div class="col-md-6">
+                                 <select id="{{ $event->id }}" class="form-control" name="{{ $event->id }}">
+                                        <option value=""> Не выбран</option>
+                                        @foreach($users as $user)
+                                           <option value="{{ $user->id }}"
+                                                 @if ($user->id == old('manager', $event->manager))
+                                                    selected="selected"
+                                                @endif>{{ $user->name}} {{$user->last_name }}</option>
+                                        @endforeach
+                                    </select>
+                             </div>
+                         </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
