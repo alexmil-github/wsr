@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Categorys;
 use App\Events;
 use App\User;
 use Illuminate\Http\Request;
@@ -15,7 +14,7 @@ class AdminController extends Controller
         $events = $events->sortBy('date');
         $users = User::all();
         //      $events = DB::table('events')->get(); //Это второй способ обращения к базе данных. В этом случае добавляем: use Illuminate\Support\Facades\DB;
-        return view('admin.index', ['events' => $events, 'users' => $users]);
+        return view('admin.index', ['events' => $events, 'users' => $users ]);
     }
 
     public function store(Request $request)
@@ -27,14 +26,12 @@ class AdminController extends Controller
     public function destroy($id)
     {
         Events::destroy($id);
-        return redirect()->back();
+        return back();
     }
-
 
     public function update_all(Request $request)
     {
         $events = Events::all();
-
         foreach ($events as $event) {
             if ($request->has($event->id)) {
                 $data = Events::find($event->id);
@@ -45,19 +42,14 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function show($id)
+    public function update(Request $request, $id)
     {
-  //      dd($id);
- //       return view('admin.index')->render();
-        return ($id);
+        $event = Events::find($id);
+        $event ->fill($request->all());
+        $event->save();
+        return back();
     }
 
-    public function update_category(Request $request)
-    {
-        $categorys = Categorys::all()->first();
-        $categorys->name = $request->name;
-        $categorys->save();
-        return redirect('home');
-    }
+
 
 }
