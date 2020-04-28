@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events;
+use App\Status;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +24,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(User $user)
     {
-        return view('home');
+        $events = Events::all();
+        $events = $events->sortBy('date');
+        $users = User::all();
+        $statuses = Status::all();
+        //      $events = DB::table('events')->get(); //Это второй способ обращения к базе данных. В этом случае добавляем: use Illuminate\Support\Facades\DB;
+        return view('home', ['events' => $events, 'users' => $users, 'statuses' => $statuses ]);
     }
 }
