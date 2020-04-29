@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Events;
+use App\Roles;
 use App\Status;
+use App\Theme;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -30,7 +32,23 @@ class HomeController extends Controller
         $events = $events->sortBy('date');
         $users = User::all();
         $statuses = Status::all();
+        $roles = Roles::all();
         //      $events = DB::table('events')->get(); //Это второй способ обращения к базе данных. В этом случае добавляем: use Illuminate\Support\Facades\DB;
-        return view('home', ['events' => $events, 'users' => $users, 'statuses' => $statuses ]);
+        return view('home', ['events' => $events, 'users' => $users, 'statuses' => $statuses, 'roles' => $roles ]);
+    }
+
+    public function addTheme(Events $events, Request $request)
+    {
+        $events->themes()->create(
+            array_merge(
+                [
+                    'owner_id' => auth()->user()->id,
+                    'event_id' => $events->id,
+                ],
+                $request->all()
+            )
+        );
+
+        return redirect()->back();
     }
 }

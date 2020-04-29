@@ -11,13 +11,13 @@
                                 <div class="row">
                                     <div class=" col-md-9">{{ $event->name }}</div>
                                     <div class="col-md-3 float-right text-primary">Дата
-                                        проведения: {{ date("d.m.Y",strtotime($event->date)) }}</div>
+                                        проведения: {{ date("d.m.Y", strtotime($event->date)) }}</div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <hr>
                                 <a href="" class="btn btn-md btn-success mb-3 float-right" role="button"
-                                   data-toggle="modal" data-target="#modal_01">Добавить тему</a>
+                                   data-toggle="modal" data-target="#modal_03" data-id="$event->id" data-content={{ $event->id }}>Добавить тему</a>
                             </div>
                         </div>
                     </div>
@@ -25,8 +25,9 @@
             @endforeach
         @endif
     </div>
+
     {{--Модальное окно добавления новой темы --}}
-    <div class="modal" tabindex="-1" role="dialog" id="modal_01">
+    <div class="modal" tabindex="-1" role="dialog" id="modal_03">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -36,11 +37,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{  route ('create_event') }}" method="POST" class="form-horizontal">
+                    <form action="" method="POST" class="form-horizontal" id="add_theme_form">
                         @csrf
                         <div class="form-group row">
                             <label for="name"
-                                   class="col-md-4 col-form-label text-md-right">{{ __('Наименование темы') }}</label>
+                                   class="col-md-4 col-form-label text-md-right">{{ __('Наименование') }}</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name='name'
                                        value="{{ isset($events->name) }}" placeholder="Введите наименование"
@@ -48,52 +49,63 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="date"
+                            <label for="status"
                                    class="col-md-4 col-form-label text-md-right">{{ __('Статус темы') }}</label>
                             <div class="col-md-6">
                                 <select id="status" class="form-control" name="status">
-                                    @foreach($statuses as $status)
-                                        <option value="{{ $status->id }}"
-                                                @if ($status->id == old('manager', "<div id='selected'></div>" ))
-                                                selected='selected'
-                                            @endif>{{ $status->name}}</option>
-                                    @endforeach
+                                    @if(count($statuses)>0)
+                                        @foreach($statuses as $status)
+                                            <option value="{{ $status->id }}"
+                                                    @if ($status->id == old('manager', "<div id='selected'></div>" ))
+                                                    selected='selected'
+                                                @endif>{{ $status->name}}
+                                            </option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
-                        <div id="access_table">
-                            <hr>
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th scope="col">id</th>
-                                    <th scope="col">Фамилия</th>
-                                    <th scope="col">Имя</th>
-                                    <th scope="col">Доступ к теме</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            <div id="access_table">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">id</th>
+                                        <th scope="col">Фамилия</th>
+                                        <th scope="col">Имя</th>
+                                        <th scope="col">Роль</th>
+                                        <th scope="col">Доступ к теме</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if(count($users)>0)
+                                        @foreach($users as $user)
+                                            <tr>
+                                                <th scope="row">{{$user->id}}</th>
+                                                <td>{{ $user->last_name }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>
+                                                    @if(count($roles)>0)
+                                                        @foreach($roles as $role)
+                                                            {{ ($role->id == $user->role) ? $role->name : '' }}
+                                                        @endforeach
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input access" checked
+                                                            @if($user->id == Auth::user()->id || $user->is_admin == 1 )
+                                                              disabled  {{-- Запрет на снятие чекбокса для владельца темы и админа--}}
+                                                            @endif
+                                                        >
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+
+                                    </tbody>
+                                </table>
+                            </div>
 
                         <div class="modal-footer">
                             <button class="btn btn-primary">Добавить</button>

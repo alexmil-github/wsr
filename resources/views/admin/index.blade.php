@@ -65,7 +65,7 @@
                                                    data-target="#modal_02" data-content="{{ $event }}">
                                                     <i class="fa fa-pencil fa-fw"></i>
                                                 </a>
-                                                <a href="{{ route('delete_event', ['id' => $event->id]) }}"
+                                                <a href="{{ route('delete_event', ['event_id' => $event->id]) }}"
                                                    class="btn btn-md btn-outline-danger">
                                                     <i class="fa fa-trash-o"></i>
                                                 </a>

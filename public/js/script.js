@@ -5,6 +5,7 @@ $(document).ready(function () {
         filterTable($(this).parents('table'));
     });
 
+    //Функия фильтра
     function filterTable($table) {
         let $filters = $table.find('.table-filters td');
         let $rows = $table.find('.table-data');
@@ -25,13 +26,12 @@ $(document).ready(function () {
         });
     }
 
-    // при открытии модального окна (панель администратора)
+    // при открытии модального окна редактирования event (панель администратора)
     $('#modal_02').on('show.bs.modal', function (event) {
         // получить кнопку, которая его открыло
-        let button = $(event.relatedTarget)
+        let button = $(event.relatedTarget);
         // извлечь информацию из атрибута data-content
-        let content = button.data('content')
-        // вывести эту информацию в элемент, имеющий id="content"
+        let content = button.data('content');
         let id = content.id;
         let old_name = content.name;
         let old_date = content.date;
@@ -53,6 +53,35 @@ $(document).ready(function () {
             //    $('#modal_02').modal('show');
         });
     }
+
+    //////////// Устанавить / удалить чекбоксы в таблице Access
+    $('#access_table').hide(500); //при открытии окна access_table скрываем
+    $("#status").change(function () { //при изменении select
+        if ($(this).val() == 3) { //если статус темы "закрытая" ( id==3 )
+            $('#access_table').show(500); // открываем access_table
+            $('input[type=checkbox]').each(function () { //начинаем перебирать все чекбокмы
+                if ($(this).prop("disabled") == false) //если элемент цикла (чекбокс) не закрыт disabled
+                {
+                    $(this).removeAttr('checked'); // то снимаем чекбокс
+                }
+            })
+        } else {
+            $('.access').attr('checked', true); //иначе ставим для всех чекбоксы
+            $('#access_table').hide(500); //скрываем access_table
+
+        }
+    });
+
+    // при открытии модального окна добавления темы
+    $('#modal_03').on('show.bs.modal', function (event) {
+        // получить кнопку, которая его открыло
+        let button = $(event.relatedTarget);
+        // извлечь информацию из атрибута data-content
+        let id = button.data('content');
+        console.log(id);
+        $(this).find('#add_theme_form').attr('action', 'events/' + id + '/themes'); //устанавливаем лоя аттрибута action новое значение
+    })
+
 
 //////////////////
 });
