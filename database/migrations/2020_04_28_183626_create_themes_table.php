@@ -17,12 +17,12 @@ class CreateThemesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedBigInteger('status');
-            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('events_id')->default(null);;
             $table->unsignedBigInteger('owner_id');
             $table->timestamps();
 
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('events_id')->references('id')->on('events')->onDelete('cascade');
             $table->foreign('status')->references('id')->on('statuses')->onDelete('cascade');
 
         });

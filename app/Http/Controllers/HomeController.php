@@ -37,18 +37,18 @@ class HomeController extends Controller
         return view('home', ['events' => $events, 'users' => $users, 'statuses' => $statuses, 'roles' => $roles ]);
     }
 
-    public function addTheme(Events $events, Request $request)
+    public function store(Events $events, Request $request)
     {
         $events->themes()->create(
             array_merge(
                 [
                     'owner_id' => auth()->user()->id,
-                    'event_id' => $events->id,
+   //                 'events_id' => $events->id,
                 ],
                 $request->all()
             )
         );
-
+//dd($id);
         return redirect()->back();
     }
 }

@@ -30,18 +30,18 @@ Route::get('admin/events', 'AdminController@events')->name('events')->middleware
 
 Route::post('admin/events', 'AdminController@store')->name('create_event')->middleware('admin'); // Создания
 
-Route::get('admin/events/{event_id}/delete', 'AdminController@destroy')->name('delete_event')->middleware('admin'); //Удаление
+Route::get('admin/events/{events_id}/delete', 'AdminController@destroy')->name('delete_event')->middleware('admin'); //Удаление
 
 Route::patch('admin/events/update_all', 'AdminController@update_all')->name('update_events')->middleware('admin'); //Редактирование списком
 
-Route::patch('admin/events/{event_id}/update', 'AdminController@update')->name('update_event')->middleware('admin'); //Редактирование одного мероприятия
+Route::patch('admin/events/{events_id}/update', 'AdminController@update')->name('update_event')->middleware('admin'); //Редактирование одного мероприятия
 
 
 //Themes
 
-Route::get('events/{event}/themes', 'HomeController@indexThemes')->name('themes')->middleware('auth'); // Список всех тем
+Route::get('events/{events_id}/themes', 'HomeController@indexThemes')->name('themes')->middleware('auth'); // Список всех тем
 
-Route::post('events/{event}/themes', 'HomeController@addTheme')->name('create_theme')->middleware('auth'); // Создания
+Route::post('events/{events_id}/themes', 'HomeController@store')->name('create_theme')->middleware('auth'); // Создание
 
 
 //Messages
