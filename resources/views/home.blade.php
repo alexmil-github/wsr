@@ -26,11 +26,13 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <ul class="list-group">
-                                                            <a class="text-decoration-none" href="#">
+                                                            <a class="text-decoration-none"
+                                                                 href="{{ route('show_messages', ['themes_id' => $theme->id]) }}">
+{{--                                                                 href="events/{{ $event->id }}/themes/{{ $theme->id }}">--}}
+
                                                                 <li class="list-group-item list-group-item-action list-group-item-secondary pointer">
-                                                                    Тема: {{ $theme->name }}</h5>
-                                                                    <span
-                                                                        class="badge badge-secondary badge-pill float-right">14</span>
+                                                                    Тема: <strong>{{ $theme->name }}</strong>
+                                                                    <span class="badge badge-secondary badge-pill float-right">14</span>
                                                                 </li>
                                                             </a>
                                                         </ul>

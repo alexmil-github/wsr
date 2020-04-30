@@ -54,7 +54,12 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function show_messages($id){
-        $messages = Message::find($id);
-        return view('messages', ['messages' => $messages]);    }
+    public function showMessages($id){
+
+        $theme = Theme::find($id);
+       $messages = [];
+//       $messages = $theme->messages();
+ //     dd($messages);
+        return view('theme', ['theme' =>$theme, 'messages' => $messages]);
+ }
 }
