@@ -88,11 +88,25 @@ $(document).ready(function () {
             url: `/messages`,
             data: $('#addMessage').serialize(),
             success: function(data) {
-                 console.log(эПривет );
+                $('#messagesBlock').append('                            <div class="row justify-content-center" id="block_add_message" >\n' +
+                    '                                    <div class="col-md-12">\n' +
+                    '                                        <div class="form-group">\n' +
+                    '                                            <ul class="list-group">\n' +
+                    '                                                <li class="list-group-item list-group-item-secondary">\n' +
+                    data.message +
+                    '                                                </li>\n' +
+                    '                                            </ul>\n' +
+                    '                                        </div>\n' +
+                    '\n' +
+                    '                                    </div>\n' +
+                    '                                </div>\n' ).show(700);
+                $('#message').val('');
             }
         });
         return false;
     });
+
+
 //////////////////
 });
 

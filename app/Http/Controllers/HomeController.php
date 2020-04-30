@@ -55,11 +55,8 @@ class HomeController extends Controller
     }
 
     public function showMessages($id){
-
         $theme = Theme::find($id);
-       $messages = [];
-//       $messages = $theme->messages();
- //     dd($messages);
+        $messages = $theme->messages;
         return view('theme', ['theme' =>$theme, 'messages' => $messages]);
  }
 }
