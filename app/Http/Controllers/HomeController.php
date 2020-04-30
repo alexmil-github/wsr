@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events;
+use App\Message;
 use App\Roles;
 use App\Status;
 use App\Theme;
@@ -52,4 +53,8 @@ class HomeController extends Controller
         );
         return redirect()->back();
     }
+
+    public function show_messages($id){
+        $messages = Message::find($id);
+        return view('messages', ['messages' => $messages]);    }
 }
