@@ -10,5 +10,9 @@ class Roles extends Model
         'name',
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at',
+    ];
+
 }
 

@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Theme extends Model
 {
     protected $fillable = [
-        'name','status','event_id','owner_id',
+        'name','status','events_id','owner_id',
     ];
+
+    protected $hidden = [
+        'created_at', 'updated_at',
+    ];
+
 }

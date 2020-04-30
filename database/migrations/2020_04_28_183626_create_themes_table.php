@@ -17,7 +17,7 @@ class CreateThemesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedBigInteger('status');
-            $table->unsignedBigInteger('events_id')->default(null);;
+            $table->unsignedBigInteger('events_id')->default(null);
             $table->unsignedBigInteger('owner_id');
             $table->timestamps();
 

@@ -33,22 +33,23 @@ class HomeController extends Controller
         $users = User::all();
         $statuses = Status::all();
         $roles = Roles::all();
+        $themes = Theme::all();
         //      $events = DB::table('events')->get(); //Это второй способ обращения к базе данных. В этом случае добавляем: use Illuminate\Support\Facades\DB;
-        return view('home', ['events' => $events, 'users' => $users, 'statuses' => $statuses, 'roles' => $roles ]);
+        return view('home', ['events' => $events, 'users' => $users, 'statuses' => $statuses, 'roles' => $roles, 'themes' => $themes]);
     }
 
-    public function store(Events $events, Request $request)
+    public function store(Request $request, $id)
     {
+        $events = Events::find($id); //Почему то без этого не работает
         $events->themes()->create(
             array_merge(
                 [
                     'owner_id' => auth()->user()->id,
-   //                 'events_id' => $events->id,
+                    'events_id' => $events->id,
                 ],
                 $request->all()
             )
         );
-//dd($id);
         return redirect()->back();
     }
 }

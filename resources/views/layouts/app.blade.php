@@ -24,7 +24,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bg-primary shadow-lg">
+        <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row shadow-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="/images/logo.png" height="70" alt="">

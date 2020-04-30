@@ -5,12 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Панель администратора</div>
+                    <div class="card-header text-white"><h5>Панель администратора</h5></div>
 
                     <div class="card-body">
                         <h3>Мероприятия</h3>
                         <hr>
-                        <a href="" class="btn btn-md btn-success mb-3 float-right" role="button" data-toggle="modal"
+                        <a href="" class="btn btn-md btn-outline-dark mb-3 float-right" role="button" data-toggle="modal"
                            data-target="#modal_01">Добавить новое</a>
                         <br>
                         @if (count($events) > 0)
@@ -60,12 +60,12 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td valign="top">
-                                                <a href="#" class="btn btn-md btn-outline-primary" data-toggle="modal"
+                                            <td valign="top" class="float-right">
+                                                <a href="#" class="btn btn-md btn-outline-dark" data-toggle="modal"
                                                    data-target="#modal_02" data-content="{{ $event }}">
                                                     <i class="fa fa-pencil fa-fw"></i>
                                                 </a>
-                                                <a href="{{ route('delete_event', ['event_id' => $event->id]) }}"
+                                                <a href="{{ route('delete_event', ['events_id' => $event->id]) }}"
                                                    class="btn btn-md btn-outline-danger">
                                                     <i class="fa fa-trash-o"></i>
                                                 </a>
@@ -75,7 +75,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                <button class="btn btn-primary">Сохранить изменения</button>
+                                <button class="btn btn-my">Сохранить изменения</button>
                             </form>
                         @endif
 
@@ -116,7 +116,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary">Добавить</button>
+                            <button class="btn btn-my">Добавить</button>
                         </div>
                     </form>
 
@@ -172,7 +172,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-primary">Сохранить</button>
+                            <button class="btn btn-my">Сохранить</button>
                         </div>
                     </form>
 

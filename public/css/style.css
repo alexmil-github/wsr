@@ -1,1 +1,34 @@
+body{
+    background: #27ae60;
+    color:#2c3e50;
+}
+nav{
+    background: #2c3e50;
+}
+.card-header{
+    background: #435f7a;
+    color:white;
+}
+.btn-my {
+    background: #435f7a;
+    color: white;
+}
+.btn-my:hover {
+    background: #2c3e50;
+    color: white;
+}
+.btn-outline-my {
+    background: #435f7a;
+    color: #435f7a;;
+}
+
+.btn-outline-my:hover {
+    background: #435f7a;
+    opacity: 0.8;
+    color: #435f7a;;
+}
+.pointer {
+    cursor: pointer;
+}
+
 
