@@ -18,7 +18,6 @@ class CreateMessagesTable extends Migration
             $table->string('message', 100);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('theme_id');
-            $table->unsignedBigInteger('events_id');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -31,10 +30,6 @@ class CreateMessagesTable extends Migration
                 ->on('themes')
                 ->onDelete('cascade');
 
-            $table->foreign('events_id')
-                ->references('id')
-                ->on('events')
-                ->onDelete('cascade');
 
 
     });

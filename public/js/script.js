@@ -81,8 +81,18 @@ $(document).ready(function () {
         console.log(id);
         $(this).find('#add_theme_form').attr('action', 'events/' + id + '/themes'); //устанавливаем лоя аттрибута action новое значение
     })
-
-
+///Добавление нового message
+    $('#btnAddMessage').click(function() {
+        $.ajax({
+            method: 'POST',
+            url: `/messages`,
+            data: $('#addMessage').serialize(),
+            success: function(data) {
+                 console.log(эПривет );
+            }
+        });
+        return false;
+    });
 //////////////////
 });
 

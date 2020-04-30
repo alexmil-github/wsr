@@ -13,12 +13,12 @@ class MessageController extends Controller
         return Message::all();
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        $theme = Theme::find($id);
+        $theme = Theme::all();
         return Message::create([
-                'theme-id' => $theme->id,
-                'user_id' => Auth::user()->id
+        //        'theme-id' => $theme->id,
+                'user_id' => auth()->user()->id
             ] + $request->all());
     }
 

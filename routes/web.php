@@ -48,5 +48,7 @@ Route::post('events/{events_id}/themes', 'HomeController@store')->name('create_t
 
 Route::get('themes/{themes_id}', 'HomeController@showMessages')->name('show_messages')->middleware('auth'); // Список сообщений темы
 
+Route::Resource('messages', 'MessageController');
+
 
 

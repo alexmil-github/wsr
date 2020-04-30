@@ -35,8 +35,12 @@
                                     @endforeach
                                 @endif
                                 <hr>
-                                    <form class="form-horizontal" id="">
-                                        <textarea rows="1" class="form-control mb-3" type="text"></textarea> <button type="submit" class="btn btn-md btn-my mb-3 float-right" role="button"><i class="fa fa-paper-plane fa-fw"
+                                    <form class="form-horizontal" id="addMessage">
+                                        @csrf
+                                        <textarea rows="1" class="form-control mb-3" type="text" id="message" name="message" required></textarea>
+                                        <input type="text" id="theme_id" name="theme_id" value={{ $theme->id }}>
+
+                                        <button type="submit" id="btnAddMessage" class="btn btn-md btn-my mb-3 float-right" role="button"><i class="fa fa-paper-plane fa-fw"
                                                                                                        aria-hidden="true"></i> Ответить</button>
                                     </form>
                             </div>
