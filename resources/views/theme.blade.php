@@ -7,12 +7,17 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-9 text-white"><h5><i class="fa fa-arrow-circle-right fa-fw"
-                                                                    aria-hidden="true"></i>&nbsp;{{ $theme->name }}
-                                </h5></div>
-                            <div class="col-md-3 float-right text-light">Дата
-                                проведения: <strong
-                                    class="text-warning"></strong>
+                            <div class="col-md-11 text-white">
+                                <h5><i class="fa fa-arrow-circle-right fa-fw"
+                                       aria-hidden="true"></i>&nbsp;{{ $theme->name }}
+                                </h5>
+                            </div>
+                            <div class="col-md-1 text-white float-right"><a href="#" class="btn btn-md btn-outline-light"
+                                                        data-toggle="modal"
+                                                        data-target="#modal_02"
+                                                        data-content="">
+                                    <i class="fa fa-cog fa-fw"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -36,6 +41,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

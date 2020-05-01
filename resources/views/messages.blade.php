@@ -8,7 +8,7 @@
                             <div class="row">
                                 <div class="col col-md-2 text-center">
                                     <h5> {{ $message->user->last_name }} {{ $message->user->name }} </h5>
-                                    <img class="img-thumbnail border-success" src="{{ $message->user->photo }}"
+                                    <img class="img-thumbnail " src="{{ $message->user->photo }}"
                                          alt="{{ $message->user->name }} ">
                                     <small>Изменено:</small>
                                 </div>
@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <div class="col col-md-1">
-                                    кнопки
+                                    <i class="fa fa-reply" aria-hidden="true"></i>
                                 </div>
 
                             </div>
