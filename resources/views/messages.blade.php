@@ -20,8 +20,22 @@
                                         {{ $message->message }}
                                     </div>
                                 </div>
-                                <div class="col col-md-1">
-                                    <i class="fa fa-reply" aria-hidden="true"></i>
+                                <div class="col col-md-1 ">
+                                    <div class="float-right">
+                                        <a href="" title="Скопировать ссылку на пост">
+                                            <i class="fa fa-share-alt text-secondary"></i>
+                                        </a>
+                                    </div><br>
+                                    <div class="float-right">
+                                        <a href="#" data-toggle="modal" data-target="#modal_04" data-content="" title="Ответить">
+                                            <i class="fa fa-reply text-secondary"></i>
+                                        </a>
+                                    </div><br>
+                                    <div class="float-right">
+                                        <a href="#" data-toggle="modal" data-target="#modal_04" data-content="" title="Редактировать">
+                                            <i class="fa fa-pencil-square-o text-secondary"></i>
+                                        </a>
+                                    </div>
                                 </div>
 
                             </div>
@@ -33,7 +47,7 @@
         </div>
     @endforeach
     <div id="messagesBlock"></div>
-    <div class="text-center ">{{ $messages->render() }}</div>
+    <div >{{ $messages->render() }}</div>
 
 @endif
 
