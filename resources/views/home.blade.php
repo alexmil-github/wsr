@@ -28,10 +28,10 @@
                                                         <ul class="list-group">
                                                             <a class="text-decoration-none"
                                                                  href="{{ route('show_messages', ['themes_id' => $theme->id]) }}">
-{{--                                                                 href="events/{{ $event->id }}/themes/{{ $theme->id }}">--}}
 
-                                                                <li class="list-group-item list-group-item-action list-group-item-secondary pointer">
-                                                                    Тема: <strong>{{ $theme->name }}</strong>
+                                                                <li class="list-group-item list-group-item-action list-group-item-outline-secondary pointer">
+                                                                    <button type="button" class="btn btn-outline-secondary btn-circle"><i class="fa fa-comments"></i></button>
+                                                                    <strong> {{ $theme->name }}</strong>
                                                                     <span class="badge badge-secondary badge-pill float-right">14</span>
                                                                 </li>
                                                             </a>
