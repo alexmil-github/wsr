@@ -31,7 +31,9 @@
                                                                 <li class="list-group-item list-group-item-action list-group-item-outline-secondary pointer">
                                                                     <button type="button" class="btn btn-outline-secondary btn-circle"><i class="fa fa-comments"></i></button>
                                                                     <strong> {{ $theme->name }}</strong>
-                                                                    <span class="badge badge-secondary badge-pill float-right">14</span>
+                                                                    <span class="badge badge-secondary badge-pill float-right">
+                                                                        {{ count($theme->messages) }}
+                                                                    </span>
                                                                 </li>
                                                             </a>
                                                         </ul>
@@ -44,7 +46,7 @@
                                 @endif
                                 <hr>
                                 <a href="" class="btn btn-md btn-my mb-3 float-right" role="button"
-                                   data-toggle="modal" data-target="#modal_03" data-id="$event->id"
+                                   data-toggle="modal" data-target="#modal_03"
                                    data-content={{ $event->id }}>Создать тему</a>
                             </div>
                         </div>

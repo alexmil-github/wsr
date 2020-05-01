@@ -53,14 +53,13 @@ class HomeController extends Controller
         );
         return redirect()->back();
     }
-
+// Вывод сообщений
     public function showMessages(Request $request, $id){
         $theme = Theme::find($id);;
         $messages = $theme->messages()->paginate(5);
         if ($request->ajax()) {
             return view('messages', compact('messages'));
         }
-
         return view('theme', ['theme' =>$theme, 'messages' => $messages]);
  }
 }
