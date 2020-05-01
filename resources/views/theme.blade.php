@@ -17,24 +17,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if(count($messages)>0)
-                            @foreach($messages as $message)
-                                <div class="row justify-content-center ">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <ul class="list-group">
-                                                <li class="list-group-item list-group-item-secondary ">
-                                                    {{ $message->message }}
-
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
-                        <div id="messagesBlock" ></div>
+                        <div id="tag_container">
+                            @include('messages')
+                        </div>
                         <hr>
                         <form class="form-horizontal" id="addMessage">
                             @csrf
@@ -51,7 +36,6 @@
             </div>
         </div>
     </div>
-
 
 
 @endsection
