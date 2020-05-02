@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                {{ url()->current() }}
+                <div class="message_id"></div>
             </div>
         </div>
     </div>

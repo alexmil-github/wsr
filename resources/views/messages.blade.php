@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="col col-md-1 ">
                                     <div class="float-right">
-                                        <a href="#" data-toggle="modal"
+                                        <a href="#" data-toggle="modal" role="button"
                                            data-target="#URLForMessage" data-content="{{ $message->id }}">
                                             <i class="fa fa-share-alt text-secondary"></i>
                                         </a>

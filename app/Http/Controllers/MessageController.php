@@ -23,6 +23,7 @@ class MessageController extends Controller
         return view('theme', ['theme' =>$theme, 'messages' => $messages]);
     }
 
+
     // Вывод сообщений для ajax
     public function ajaxMessages(Request $request, $id){
         $theme = Theme::find($id);;
@@ -43,7 +44,7 @@ class MessageController extends Controller
 
     public function show(Message $message)
     {
-        return $message;
+        return view('showMessage', ['message' => $message]);
     }
 
     public function update(Request $request, Message $message)

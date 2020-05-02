@@ -52,5 +52,7 @@ Route::get('themes_ajax/{themes_id}', 'MessageController@ajaxMessages')->name('s
 
 Route::Resource('messages', 'MessageController');
 
+//Route::get('messages/{message_id}', 'MessageController@showMessage');
+
 
 

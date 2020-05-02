@@ -1,3 +1,6 @@
+let _URL = window.location.origin; // определени доменного имени текущего сайта
+
+
 $(document).ready(function () {
 
     //Фильтр по наименованиям мероприятий
@@ -5,7 +8,7 @@ $(document).ready(function () {
         filterTable($(this).parents('table'));
     });
 
-    //Функия фильтра
+    //Функция фильтра
     function filterTable($table) {
         let $filters = $table.find('.table-filters td');
         let $rows = $table.find('.table-data');
@@ -73,8 +76,10 @@ $(document).ready(function () {
         console.log(id);
         $(this).find('#add_theme_form').attr('action', 'events/' + id + '/themes'); //устанавливаем для аттрибута action новое значение
     });
-//Добавление нового message
 
+
+
+//Добавление нового message
    $('#btnAddMessage').click(function () {
        let theme_id = $('#theme_id').val();
        $.ajax({
@@ -140,6 +145,18 @@ function getData(page) {
         alert('No response from server');
     });
 }
+
+// при открытии модального окна "Поделиься"
+$(document).on('show.bs.modal', '#URLForMessage', function (event) {
+    // получить кнопку, которая его открыло
+    let button = $(event.relatedTarget);
+    // извлечь информацию из атрибута data-content
+    let id = button.data('content'); //получаем id ссобщения из кнопки
+    let new_url = `<a target=_blank href=${_URL}/messages/${id}>${_URL}/messages/${id}</a>`;
+    $(this).find('.message_id').html(new_url);
+});
+
+
 
 
 
