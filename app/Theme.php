@@ -18,4 +18,9 @@ class Theme extends Model
         return $this->hasMany(Message::class);
     }
 
+    public function event()
+    {
+        return $this->belongsTo(Events::class);
+    }
+
 }

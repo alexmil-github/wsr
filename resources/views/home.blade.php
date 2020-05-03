@@ -10,7 +10,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-9 text-white"><h5><i class="fa fa-calendar fa-fw"
-                                                                            aria-hidden="true"></i>&nbsp;{{ $event->name }}
+                                                                            aria-hidden="true"></i>&nbsp;{{ $event->name }} {{(($event->manager)) }}
                                         </h5></div>
                                     <div class="col-md-3 float-right text-light">Дата проведения: <strong
                                             class="text-warning">{{ date("d.m.Y", strtotime($event->date)) }}</strong>
@@ -26,12 +26,15 @@
                                                     <div class="form-group">
                                                         <ul class="list-group">
                                                             <a class="text-decoration-none"
-                                                                 href="{{ route('show_messages', ['themes_id' => $theme->id]) }}">
-
+                                                               href="{{ route('show_messages', ['themes_id' => $theme->id]) }}">
                                                                 <li class="list-group-item list-group-item-action list-group-item-outline-secondary pointer">
-                                                                    <button type="button" class="btn btn-outline-secondary btn-circle"><i class="fa fa-comments"></i></button>
+                                                                    <button type="button"
+                                                                            class="btn btn-outline-secondary btn-circle">
+                                                                        <i class="fa fa-comments"></i></button>
                                                                     <strong> {{ $theme->name }}</strong>
-                                                                    <span class="badge badge-secondary badge-pill float-right">
+
+                                                                    <span
+                                                                        class="badge badge-secondary badge-pill float-right">
                                                                         {{ count($theme->messages) }}
                                                                     </span>
                                                                 </li>
@@ -44,10 +47,14 @@
                                         @endif
                                     @endforeach
                                 @endif
-                                <hr>
-                                <a href="" class="btn btn-md btn-my mb-3 float-right" role="button"
-                                   data-toggle="modal" data-target="#modal_03"
-                                   data-content={{ $event->id }}>Создать тему</a>
+{{--                                    Кнопка "Создать тему" досупна только менеджеру мероприятия или админу--}}
+{{ ($event->manager) }} ======== {{  Auth::user()->id }}
+                                @if((($event->manager) === Auth::user()) || (Auth::user()->is_admin == 1 ))
+                                    <hr>
+                                    <a href="" class="btn btn-md btn-my mb-3 float-right" role="button"
+                                       data-toggle="modal" data-target="#modal_03"
+                                       data-content={{ $event->id }}>Создать тему</a>
+                                @endif
                             </div>
                         </div>
                     </div>
