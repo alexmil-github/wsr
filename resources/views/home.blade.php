@@ -48,8 +48,8 @@
                                     @endforeach
                                 @endif
 {{--                                    Кнопка "Создать тему" досупна только менеджеру мероприятия или админу--}}
-{{ ($event->manager) }} ======== {{  Auth::user()->id }}
-                                @if((($event->manager) === Auth::user()) || (Auth::user()->is_admin == 1 ))
+
+                                @if(($event->manager) ===  Auth::user()->id || (Auth::user()->is_admin == 1 ))
                                     <hr>
                                     <a href="" class="btn btn-md btn-my mb-3 float-right" role="button"
                                        data-toggle="modal" data-target="#modal_03"
