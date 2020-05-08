@@ -146,13 +146,13 @@ function getData(page) {
     });
 }
 
-// при открытии модального окна "Поделиься"
+// при открытии модального окна "Поделиться"
 $(document).on('show.bs.modal', '#URLForMessage', function (event) {
     // получить кнопку, которая его открыло
     let button = $(event.relatedTarget);
     // извлечь информацию из атрибута data-content
     let id = button.data('content'); //получаем id ссобщения из кнопки
-    let new_url = `<a target=_blank href=${_URL}/messages/${id}>${_URL}/messages/${id}</a>`;
+    let new_url = `<textarea>${_URL}/messages/${id}</textarea>`;
     $(this).find('.message_id').html(new_url);
 });
 
