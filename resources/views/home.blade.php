@@ -12,7 +12,7 @@
                                     <div class="col-md-9 text-white"><h5><i class="fa fa-calendar fa-fw"
                                                                             aria-hidden="true"></i>&nbsp;{{ $event->name }}
                                         </h5></div>
-                                    <div class="col-md-3 float-right text-light">Дата проведения: <strong>
+                                    <div class="col-md-3 float-right text-light">Дата проведения: <strong
                                             class="text-warning">{{ date("d.m.Y", strtotime($event->date)) }}</strong>
                                     </div>
                                 </div>
