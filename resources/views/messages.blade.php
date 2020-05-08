@@ -10,10 +10,12 @@
                                     <h6> {{ $message->user->last_name }} {{ $message->user->name }} </h6>
                                     <img class="img-thumbnail" src="{{ $message->user->photo }}"
                                          alt="{{ $message->user->name }} ">
+
                                 </div>
                                 <div class="col col-md-9">
                                     <div class="row ml-1">
-                                        <small>Создано: {{date("d.m.Y",strtotime($message->created_at))}}</small>&nbsp&nbsp
+                                        <small>id: {{ $message->id }}</small>&nbsp&nbsp&nbsp&nbsp
+                                        <small>Создано: {{date("d.m.Y",strtotime($message->created_at))}}</small>&nbsp&nbsp&nbsp&nbsp
                                         <small>Изменено:</small>
                                     </div>
                                     <div class="row mt-4 ml-1">
